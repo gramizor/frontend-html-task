@@ -1,0 +1,141 @@
+$background-grey: #E2E8F0;
+$background-white: #FFF;
+$font-color: #6A7789;
+$orange: #ff8400;
+$orange-light: #ffe2c0;
+
+.sidebar {
+    border-radius: 10px;
+    outline: 2px solid #F0F2F5;
+    outline-offset: -3px;
+    padding: 10px;
+    background-color: #fff;
+    color: $font-color;
+    display: flex;
+    flex-direction: column;
+    max-width: 37px;
+    height: 95vh;
+
+    span {
+        display: none;
+    }
+
+    .navbar {
+        div {
+            span {
+                display: none;
+            }
+        }
+    }
+
+    button {
+        cursor: pointer;
+        position: absolute;
+        right: -35px;
+        color: $font-color;
+        background-color: $background-white;
+        border: none;
+        border-radius: 50%;
+        padding: 2px 5px 0;
+    }
+}
+
+.opened {
+    max-width: 150px;
+
+    button {
+        cursor: pointer;
+        position: absolute;
+        right: -18px;
+        color: $font-color;
+        background-color: $background-grey;
+        border: none;
+        border-radius: 50%;
+        padding: 2px 5px 0;
+    }
+
+    .header {
+        span {
+            display: inline;
+            margin-left: 3px;
+        }
+    }
+
+    .navbar {
+        div {
+            span {
+                display: inline;
+            }
+        }
+    }
+}
+
+
+.header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 10px 0;
+
+    img {
+        width: 35px;
+    }
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+
+    >div {
+        &:first-child {
+            .element {
+                &:nth-child(2) {
+                    background-color: $orange-light;
+                    color: $orange;
+                }
+            }
+        }
+    }
+
+    .element {
+        padding: 10px;
+        border-radius: 10px;
+        margin: 0 auto;
+        &:hover {
+            cursor: pointer;
+            background-color: $background-grey;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        &:active {
+            background-color: $orange-light;
+            color: $orange;
+        }
+
+        span {
+            overflow: hidden;
+            display: inline-block;
+            margin-left: 10px;
+        }
+    }
+}
+
+button {
+    transition: right 0.3s ease;
+
+    &:active,
+    &:focus {
+        outline: none;
+    }
+}
+
+.sidebar,
+.opened {
+    white-space: nowrap;
+    transition: max-width 0.3s ease;
+}
