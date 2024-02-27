@@ -1,23 +1,23 @@
 //Sidebar.jsx
 
-import './sidebar.scss';
-import React from 'react';
-import classnames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import logo from '../../assets/logo.png'
+import "./sidebar.scss";
+import React from "react";
+import classnames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logo from "../../assets/logo.png";
 
 const routes = [
-    { title: 'Home', icon: 'fas-solid fa-house', path: '/' },
-    { title: 'Sales', icon: 'chart-line', path: '/sales' },
-    { title: 'Costs', icon: 'chart-column', path: '/costs' },
-    { title: 'Payments', icon: 'wallet', path: '/payments' },
-    { title: 'Finances', icon: 'chart-pie', path: '/finances' },
-    { title: 'Messages', icon: 'envelope', path: '/messages' },
+    { title: "Home", icon: "fas-solid fa-house", path: "/" },
+    { title: "Sales", icon: "chart-line", path: "/sales" },
+    { title: "Costs", icon: "chart-column", path: "/costs" },
+    { title: "Payments", icon: "wallet", path: "/payments" },
+    { title: "Finances", icon: "chart-pie", path: "/finances" },
+    { title: "Messages", icon: "envelope", path: "/messages" },
 ];
 
 const bottomRoutes = [
-    { title: 'Settings', icon: 'sliders', path: '/settings' },
-    { title: 'Support', icon: 'phone-volume', path: '/support' },
+    { title: "Settings", icon: "sliders", path: "/settings" },
+    { title: "Support", icon: "phone-volume", path: "/support" },
 ];
 
 export default class Sidebar extends React.Component {
@@ -26,11 +26,11 @@ export default class Sidebar extends React.Component {
 
         this.state = {
             isOpened: true,
+            isActive: true,
         };
     }
-
     toggleSidebar = () => {
-        this.setState((state) => ({ isOpened: !state.isOpened }));
+        this.setState((state) => ({ isOpened: !state.isOpened, isActive: !state.isOpened })); // Add and toggle isActive
     };
 
     goToRoute = (path) => {
@@ -38,49 +38,56 @@ export default class Sidebar extends React.Component {
     };
 
     render() {
-        const { isOpened } = this.state;
-        const containerClassnames = classnames('sidebar', { opened: isOpened });
+        const { isOpened, isActive } = this.state;
+        const containerClassnames = classnames(
+            "sidebar",
+            { "opened animation-opening": isOpened },
+            { "animation-closing": !isOpened }
+        );
 
         return (
             <div className={containerClassnames}>
-                <div className='header'>
-                    <img
-                        src={logo}
-                        alt="TensorFlow logo"
-                    />
+                <div className="header">
+                    <img src={logo} alt="TensorFlow logo" />
                     <span>TensorFlow</span>
-                    <button onClick={this.toggleSidebar}>
-                        <FontAwesomeIcon icon={isOpened ? 'angle-left' : 'angle-right'} />
+                    <button onClick={this.toggleSidebar}
+                        className={`sidebar-button ${isActive ? 'active' : ''}`}>
+                        <FontAwesomeIcon icon={isOpened ? "angle-left" : "angle-right"} />
                     </button>
                 </div>
                 <div className="navbar">
                     <div>
-                        {
-                            routes.map((route) => (
-                                <div key={route.title}
-                                    onClick={() => this.goToRoute(route.path)}
-                                    className='element'>
-                                    <FontAwesomeIcon icon={route.icon} />
-                                    <span>{route.title}</span>
-                                </div>
-                            ))
-                        }
+                        {routes.map((route) => (
+                            <div
+                                key={route.title}
+                                onClick={() => this.goToRoute(route.path)}
+                                className="element"
+                            >
+                                <FontAwesomeIcon
+                                    icon={route.icon}
+                                    className="fa-icon"
+                                />
+                                <span>{route.title}</span>
+                            </div>
+                        ))}
                     </div>
 
                     <div>
-                        {
-                            bottomRoutes.map((route) => (
-                                <div key={route.title}
-                                    onClick={() => this.goToRoute(route.path)}
-                                    className='element'>
-                                    <FontAwesomeIcon icon={route.icon} />
-                                    <span>{route.title}</span>
-                                </div>
-                            ))
-                        }
+                        {bottomRoutes.map((route) => (
+                            <div
+                                key={route.title}
+                                onClick={() => this.goToRoute(route.path)}
+                                className="element"
+                            >
+                                <FontAwesomeIcon
+                                    icon={route.icon}
+                                    className="fa-icon"
+                                />
+                                <span>{route.title}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
-
             </div>
         );
     }

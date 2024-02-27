@@ -1,75 +1,58 @@
-$background-grey: #E2E8F0;
-$background-white: #FFF;
-$font-color: #6A7789;
+$background-grey: #e2e8f0;
+$background-white: #fff;
+$font-color: #6a7789;
 $orange: #ff8400;
 $orange-light: #ffe2c0;
 
 .sidebar {
     border-radius: 10px;
-    outline: 2px solid #F0F2F5;
+    outline: 2px solid #f0f2f5;
     outline-offset: -3px;
     padding: 10px;
     background-color: #fff;
     color: $font-color;
     display: flex;
     flex-direction: column;
-    max-width: 37px;
+    width: 37px;
     height: 95vh;
+    transition: width 0.3s ease-in 0.2s;
 
-    span {
-        display: none;
-    }
-
-    .navbar {
-        div {
-            span {
-                display: none;
-            }
-        }
-    }
+    span,
+    .navbar div span {}
 
     button {
         cursor: pointer;
+        padding: 1px 0 0 2px;
         position: absolute;
         right: -35px;
         color: $font-color;
         background-color: $background-white;
-        border: none;
-        border-radius: 50%;
-        padding: 2px 5px 0;
+
     }
 }
 
 .opened {
-    max-width: 150px;
+    transition-delay: 0s;
+    width: 150px;
 
     button {
         cursor: pointer;
+        padding: 1px 3px 0 2px;
         position: absolute;
-        right: -18px;
+        right: -19px;
         color: $font-color;
         background-color: $background-grey;
-        border: none;
-        border-radius: 50%;
-        padding: 2px 5px 0;
     }
 
     .header {
+
         span {
+            opacity: 1;
             display: inline;
             margin-left: 3px;
         }
     }
-
-    .navbar {
-        div {
-            span {
-                display: inline;
-            }
-        }
-    }
 }
-
 
 .header {
     display: flex;
@@ -79,6 +62,12 @@ $orange-light: #ffe2c0;
 
     img {
         width: 35px;
+    }
+
+    span {
+        white-space: nowrap;
+        margin-left: 3px;
+        overflow: hidden;
     }
 }
 
@@ -99,10 +88,17 @@ $orange-light: #ffe2c0;
         }
     }
 
+    .fa-icon {
+        margin-bottom: 5px;
+    }
+
     .element {
-        padding: 10px;
+        padding: 5px 10px;
         border-radius: 10px;
         margin: 0 auto;
+        white-space: nowrap;
+        overflow: hidden;
+
         &:hover {
             cursor: pointer;
             background-color: $background-grey;
@@ -126,7 +122,10 @@ $orange-light: #ffe2c0;
 }
 
 button {
-    transition: right 0.3s ease;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
 
     &:active,
     &:focus {
@@ -134,8 +133,38 @@ button {
     }
 }
 
-.sidebar,
-.opened {
-    white-space: nowrap;
-    transition: max-width 0.3s ease;
+.rotate {
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+.sidebar .header button {
+    transition: transform 0.5s ease-in-out;
+}
+
+.sidebar .header button.active {
+    transform: translateX(10px); // Измените значение translateX для желаемого смещения
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+.sidebar .header button.active {
+    animation: rotate 0.5s linear;
 }
