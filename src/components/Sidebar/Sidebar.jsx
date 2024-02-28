@@ -20,17 +20,18 @@ const bottomRoutes = [
     { title: "Support", icon: "phone-volume", path: "/support" },
 ];
 
+
 export default class Sidebar extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             isOpened: true,
-            isActive: true,
         };
     }
+
     toggleSidebar = () => {
-        this.setState((state) => ({ isOpened: !state.isOpened, isActive: !state.isOpened })); // Add and toggle isActive
+        this.setState((state) => ({ isOpened: !state.isOpened }));
     };
 
     goToRoute = (path) => {
@@ -38,21 +39,19 @@ export default class Sidebar extends React.Component {
     };
 
     render() {
-        const { isOpened, isActive } = this.state;
-        const containerClassnames = classnames(
-            "sidebar",
-            { "opened animation-opening": isOpened },
-            { "animation-closing": !isOpened }
-        );
+        const { isOpened } = this.state;
+        const containerClassnames = classnames('sidebar', { opened: isOpened });
+
 
         return (
             <div className={containerClassnames}>
                 <div className="header">
                     <img src={logo} alt="TensorFlow logo" />
                     <span>TensorFlow</span>
-                    <button onClick={this.toggleSidebar}
-                        className={`sidebar-button ${isActive ? 'active' : ''}`}>
-                        <FontAwesomeIcon icon={isOpened ? "angle-left" : "angle-right"} />
+                    <button onClick={this.toggleSidebar}>
+                        <FontAwesomeIcon
+                            icon={isOpened ? "angle-left" : "angle-right"}
+                        />
                     </button>
                 </div>
                 <div className="navbar">
@@ -77,7 +76,7 @@ export default class Sidebar extends React.Component {
                             <div
                                 key={route.title}
                                 onClick={() => this.goToRoute(route.path)}
-                                className="element"
+                                className="element bottom"
                             >
                                 <FontAwesomeIcon
                                     icon={route.icon}
