@@ -14,20 +14,23 @@ $orange-light: #ffe2c0;
     display: flex;
     flex-direction: column;
     width: 37px;
+    transition: width 0.3s ease-in-out;
+    transition-delay: 0s;
     height: 95vh;
-    transition: width 0.3s ease-in 0.2s;
 
     span,
-    .navbar div span {}
+    .navbar div span {
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+    }
 
     button {
-        cursor: pointer;
-        padding: 1px 0 0 2px;
-        position: absolute;
+        padding: 1px 0 0 1px;
         right: -35px;
-        color: $font-color;
         background-color: $background-white;
-
+        transform: rotateZ(0);
+        transition: background-color 0.3s ease, right 0.3s ease;
+        animation: ease-in-out rotateRight 0.3s normal;
     }
 }
 
@@ -36,12 +39,12 @@ $orange-light: #ffe2c0;
     width: 150px;
 
     button {
-        cursor: pointer;
         padding: 1px 3px 0 2px;
-        position: absolute;
-        right: -19px;
-        color: $font-color;
+        right: -20px;
         background-color: $background-grey;
+        transform: rotateZ(0);
+        transition: background-color 0.3s ease, right 0.3s ease;
+        animation: ease-in-out rotateLeft 0.3s reverse;
     }
 
     .header {
@@ -50,6 +53,16 @@ $orange-light: #ffe2c0;
             opacity: 1;
             display: inline;
             margin-left: 3px;
+        }
+    }
+
+    .navbar {
+        div {
+            .element {
+                span {
+                    opacity: 1;
+                }
+            }
         }
     }
 }
@@ -68,6 +81,22 @@ $orange-light: #ffe2c0;
         white-space: nowrap;
         margin-left: 3px;
         overflow: hidden;
+    }
+
+    button {
+        width: 20px;
+        height: 20px;
+        border: none;
+        border-radius: 50%;
+
+        cursor: pointer;
+        position: absolute;
+        color: $font-color;
+
+        &:active,
+        &:focus {
+            outline: none;
+        }
     }
 }
 
@@ -95,7 +124,7 @@ $orange-light: #ffe2c0;
     .element {
         padding: 5px 10px;
         border-radius: 10px;
-        margin: 0 auto;
+        margin: 0 auto 10px;
         white-space: nowrap;
         overflow: hidden;
 
@@ -104,9 +133,13 @@ $orange-light: #ffe2c0;
             background-color: $background-grey;
         }
 
-        &:not(:last-child) {
-            margin-bottom: 10px;
+        .bottom {
+            &:not(:last-child) {
+                margin-bottom: 10px;
+            }
         }
+
+
 
         &:active {
             background-color: $orange-light;
@@ -121,50 +154,35 @@ $orange-light: #ffe2c0;
     }
 }
 
-button {
-    width: 20px;
-    height: 20px;
-    border: none;
-    border-radius: 50%;
 
-    &:active,
-    &:focus {
-        outline: none;
+@keyframes rotateLeft {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateZ(180deg);
     }
 }
 
-.rotate {
-    animation: rotate 1s linear infinite;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
+@keyframes rotateRight {
+    0% {
+        transform: rotateZ(180deg);
     }
 
-    to {
-        transform: rotate(180deg);
+    100% {
+        transform: rotateZ(0deg);
     }
 }
 
-.sidebar .header button {
-    transition: transform 0.5s ease-in-out;
-}
-
-.sidebar .header button.active {
-    transform: translateX(10px); // Измените значение translateX для желаемого смещения
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(180deg);
+@media (max-height: 450px) {
+    .sidebar {
+        height: auto;
     }
 }
 
-.sidebar .header button.active {
-    animation: rotate 0.5s linear;
+@media (min-height: 450px) {
+    .sidebar {
+        height: 95vh;
+    }
 }
