@@ -4,7 +4,7 @@ import "./sidebar.scss";
 import React from "react";
 import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import logo from "../../assets/logo.png";
+import logo from "/logo.png"
 
 const routes = [
     { title: "Home", icon: "fas-solid fa-house", path: "/" },
